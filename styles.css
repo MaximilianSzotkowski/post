@@ -1,0 +1,235 @@
+/* Reset and Variables */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+:root {
+    --koma-red: #D21A1C;
+    --koma-white: #FFFFFF;
+}
+
+body {
+    background-color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* iPhone Frame container */
+.perspective-container {
+    perspective: 1000px;
+}
+
+.iphone-frame {
+    width: 390px;
+    height: 844px;
+    background-color: #000;
+    border-radius: 44px;
+    padding: 12px;
+    position: relative;
+    box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5), 0 30px 60px -30px rgba(0,0,0,0.3);
+}
+
+.dynamic-island {
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 35px;
+    background-color: #000;
+    border-radius: 20px;
+    z-index: 100;
+}
+
+/* Formatted Screen */
+.screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 32px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Theme classes */
+.theme-red {
+    background-color: var(--koma-red);
+    color: var(--koma-white);
+}
+
+.theme-white {
+    background-color: var(--koma-white);
+    color: var(--koma-red);
+}
+
+/* Top & Bottom Patterns */
+.pattern {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+}
+
+.pattern-top {
+    top: -20px;
+}
+
+.pattern-bottom {
+    bottom: 60px; /* above the dots */
+}
+
+/* Content Area */
+.carousel-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 44px;
+    text-align: center;
+    z-index: 2;
+}
+
+.slide-title {
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1.35;
+    letter-spacing: -0.3px;
+}
+
+/* Navigation & Footer elements */
+.slide-counter {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.dot-nav {
+    position: absolute;
+    bottom: 40px;
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    width: 100%;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    opacity: 1;
+    width: 16px;
+    border-radius: 4px;
+}
+
+.dot-white {
+    background: var(--koma-white);
+}
+
+.dot-red {
+    background: var(--koma-red);
+}
+
+/* Buttons */
+.btn-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.05); /* Lighter background to not obstruct */
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.2s;
+    backdrop-filter: blur(5px);
+}
+
+.btn-nav:hover {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.btn-prev {
+    left: 8px;
+}
+
+.btn-next {
+    right: 8px;
+}
+
+/* Custom Slide Elements */
+.slide-list {
+    text-align: left;
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.slide-list li {
+    position: relative;
+    margin-bottom: 12px;
+    font-size: 22px;
+    line-height: 1.25;
+}
+
+.slide-list li::before {
+    content: "→";
+    position: absolute;
+    left: -30px;
+    font-weight: 800;
+}
+
+.hashtags {
+    font-size: 16px;
+    opacity: 0.8;
+    font-weight: 400;
+}
+
+/* Background Image */
+.bg-image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.final-slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(210, 26, 28, 0.85); /* KOMA Red overlay */
+}
