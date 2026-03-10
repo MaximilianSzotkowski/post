@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOMA Modular - IG Post</title>
+    <!-- We can reuse or embed styles, but I will make it standalone for ease -->
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: #111; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .post-container {
+            width: 100%;
+            max-width: 470px;
+            background-color: #000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            color: #fff;
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 14px;
+        }
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #D21A1C;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 12px;
+        }
+        .username {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .post-image-container {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background-color: #222;
+        }
+        .post-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .post-actions {
+            display: flex;
+            padding: 14px;
+            gap: 16px;
+        }
+        .action-icon {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: #fff;
+            stroke-width: 2;
+            cursor: pointer;
+        }
+        .action-icon:hover { opacity: 0.7; }
+        .post-caption {
+            padding: 0 14px 14px 14px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .post-caption span.trigger { font-weight: 600; margin-right: 5px; }
+        .emoji-list {
+            margin: 15px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        .emoji-list li { margin-bottom: 6px; }
+        .cta-section { margin-top: 15px; font-weight: 600; }
+    </style>
+</head>
+
+<body>
+    <div class="post-container">
+        <!-- Header -->
+        <div class="post-header">
+            <div class="avatar">K</div>
+            <div class="username">koma_modular</div>
+        </div>
+
+        <!-- Image -->
+        <div class="post-image-container">
+            <img class="post-image" src="yevgeniy-mironov-lK33AySZC9Y-unsplash.jpg" alt="Premium Modular Architecture">
+        </div>
+
+        <!-- Actions (Like, Comment, Share) -->
+        <div class="post-actions">
+            <!-- Like -->
+            <svg class="action-icon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <!-- Comment -->
+            <svg class="action-icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            <!-- Share (emphasized in prompt) -->
+            <svg class="action-icon" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </div>
+
+        <!-- Caption -->
+        <div class="post-caption">
+            <span class="trigger">koma_modular</span>
+            Stavební buňka? ❌ <br>
+            Takhle vypadá modulární architektura dnes.
+
+            <ul class="emoji-list">
+                <li>⏱️ 4 měsíce výstavby.</li>
+                <li>💰 Pevná cena.</li>
+                <li>☔️ Žádné čekání na počasí.</li>
+            </ul>
+
+            <div class="cta-section">
+                Znáš developera, který pořád staví postaru a ztrácí čas?<br>
+                ✈️ Pošli mu to do zpráv.
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

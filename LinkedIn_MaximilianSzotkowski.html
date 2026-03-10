@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOMA Modular - Carousel Expert Pivot</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- React & Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- GSAP for smooth text swaps -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const PatternContent = ({ color }) => {
+            const pattern = [];
+            // Simple generic geometric wave pattern to match the "stack of modules"
+            // creating a row of modules
+            for (let i = 0; i < 20; i++) {
+                pattern.push(
+                    <g key={i} transform={`translate(${i * 40}, 0)`}>
+                        <polygon points="20,0 40,10 20,20 0,10" fill="none" stroke={color} strokeWidth="1" />
+                        <polygon points="0,10 20,20 20,40 0,30" fill="none" stroke={color} strokeWidth="1" />
+                        <polygon points="40,10 20,20 20,40 40,30" fill="none" stroke={color} strokeWidth="1" />
+                    </g>
+                );
+            }
+            return (
+                <svg width="100%" height="80" viewBox="0 0 400 60" preserveAspectRatio="xMidYMid slice" style={{ opacity: 0.5 }}>
+                    {pattern}
+                </svg>
+            );
+        };
+
+        const slides = [
+            {
+                content: "Modul isn't a container.<br><br>A hotel v Letňanech u PVA EXPO to dokazuje lépe než jakýkoli argument.",
+                theme: "theme-red",
+            },
+            {
+                content: "Většina developerů, se kterými mluvím, má v hlavě stejný obrázek:<br>šedá buňka, plech, dočasnost.<br><br>Zatím jejich konkurent položil první modul v prvním červencovém týdnu.<br>O necelé tři měsíce později dolaďoval interiéry.",
+                theme: "theme-white",
+            },
+            {
+                content: "Co konkrétně vzniklo:<br><br><ul class='slide-list'><li>4podlažní hotel, 104 pokojů, restaurace</li><li>160 modulů vyrobených ve Vizovicích</li><li>hlučná montáž jeřábem: jen několik dní</li><li>pevná cena, žádné vícepráce</li><li>sítě vedené z chodby — servis bez vstupu do pokojů</li></ul>",
+                theme: "theme-red",
+            },
+            {
+                content: "Hosté neví, že spí v modulární stavbě.<br>Architekti to poznají. A oceňují to.<br><br>Budoucnost výstavby není otázka materiálu.<br>Je to otázka přístupu.",
+                theme: "theme-white",
+            },
+            {
+                content: "Jak dlouho trvala vaše poslední stavba oproti původnímu plánu?<br>Napište do komentáře. 👇<br><br><span class='hashtags'>#modularita #development #hotely #výstavba #KOMAmodular</span>",
+                theme: "theme-red",
+                image: "yevgeniy-mironov-lK33AySZC9Y-unsplash.jpg"
+            }
+        ];
+
+        function App() {
+            const [current, setCurrent] = useState(0);
+
+            useEffect(() => {
+                gsap.fromTo(".slide-inner",
+                    { opacity: 0, scale: 0.98 },
+                    { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }
+                );
+            }, [current]);
+
+            const next = () => setCurrent((c) => (c + 1) % slides.length);
+            const prev = () => setCurrent((c) => (c - 1 + slides.length) % slides.length);
+
+            const slide = slides[current];
+            const isRed = slide.theme === 'theme-red';
+            const patternColor = isRed ? '#ffffff' : '#c0c0c0';
+
+            return (
+                <div className="perspective-container">
+                    <div className="iphone-frame">
+                        <div className="dynamic-island"></div>
+                        <div className={`screen ${slide.theme}`}>
+
+                            <div className="pattern pattern-top">
+                                <PatternContent color={patternColor} />
+                            </div>
+
+                            <div className="carousel-content">
+                                {slide.image && (
+                                    <div className="bg-image-container">
+                                        <img src={slide.image} className="final-slide-image" alt="Project presentation" />
+                                        <div className="bg-overlay"></div>
+                                    </div>
+                                )}
+                                <div className="slide-inner">
+                                    <h2 className="slide-title" dangerouslySetInnerHTML={{ __html: slide.content }}></h2>
+                                </div>
+                            </div>
+
+                            <div className="pattern pattern-bottom">
+                                <PatternContent color={patternColor} />
+                            </div>
+
+                            <div className="slide-counter">{current + 1}/{slides.length}</div>
+
+                            <button className="btn-nav btn-prev" onClick={prev} style={{ display: current === 0 ? 'none' : 'flex', color: isRed ? 'white' : 'red' }}>‹</button>
+                            <button className="btn-nav btn-next" onClick={next} style={{ display: current === slides.length - 1 ? 'none' : 'flex', color: isRed ? 'white' : 'red' }}>›</button>
+
+                            <div className="dot-nav">
+                                {slides.map((_, i) => (
+                                    <div key={i} className={`dot ${i === current ? 'active' : ''} ${isRed ? 'dot-white' : 'dot-red'}`} />
+                                ))}
+                            </div>
+                            <div style={{ height: 40 }}></div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
